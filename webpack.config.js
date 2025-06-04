@@ -26,6 +26,17 @@ module.exports = {
 	output: {
 		filename: 'index.js',
 		path: path.resolve(__dirname, 'out/src'),
+		publicPath: '/',
+	},
+	devServer: {
+		static: {
+			directory: path.join(__dirname, 'out/src'),
+		},
+		port: 8080,
+		historyApiFallback: true,
+		compress: true,
+		hot: false,
+		liveReload: false,
 	},
 	cache: false,
 };

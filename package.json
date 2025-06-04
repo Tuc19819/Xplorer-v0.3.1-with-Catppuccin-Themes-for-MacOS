@@ -17,7 +17,7 @@
 	],
 	"scripts": {
 		"start": "yarn dev",
-		"web": "concurrently \"cd api/web && cargo run\" \"live-server ./out/src --no-browser\"",
+		"web": "concurrently \"cd api/web && cargo run\" \"npx webpack serve\"",
 		"dev": "yarn compile && concurrently --kill-others \"yarn compile:watch\" \"yarn sass:watch\" \"yarn web\" \"tauri dev\"",
 		"clean": "rimraf out",
 		"sass": "sass src/Public/style.scss out/src/Public/style.css",
@@ -26,7 +26,8 @@
 		"pretest": "yarn compile",
 		"test": "jest",
 		"copyfiles": "node scripts/copyfiles",
-		"compile": "webpack && yarn sass && yarn copyfiles",
+		"copy-icons": "node scripts/copy-icons.js",
+		"compile": "webpack && yarn sass && yarn copyfiles && yarn copy-icons",
 		"compile:watch": "webpack --watch",
 		"crowdin": "crowdin",
 		"crowdin:pull": "crowdin pull",
@@ -81,7 +82,8 @@
 		"ts-loader": "^9.2.6",
 		"typescript": "^4.4.2",
 		"webpack": "^5.58.2",
-		"webpack-cli": "^4.9.0"
+		"webpack-cli": "^4.9.0",
+		"webpack-dev-server": "^5.2.2"
 	},
 	"dependencies": {
 		"@tauri-apps/api": "^1.1.0",

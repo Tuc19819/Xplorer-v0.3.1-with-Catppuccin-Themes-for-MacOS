@@ -72,6 +72,7 @@ const windowManager = async (): Promise<void> => {
 		document.querySelector('.window-manager').parentNode.removeChild(document.querySelector('.window-manager'));
 	}
 	setDecorations(appearance?.frameStyle !== 'default');
+
 	// Minimize the screen
 	document.querySelector('#minimize')?.addEventListener('click', minimize);
 	document.querySelector('#minimize')?.setAttribute('title', await Translate('Minimize'));

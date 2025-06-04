@@ -43,6 +43,10 @@ const Appearance = async (): Promise<void> => {
 		{ name: 'Dark', identifier: 'dark' },
 		{ name: 'Light+', identifier: 'light+' },
 		{ name: 'Dark+', identifier: 'dark+' },
+		{ name: 'Catppuccin Latte', identifier: 'catppuccin-latte' },
+		{ name: 'Catppuccin Frappe', identifier: 'catppuccin-frappe' },
+		{ name: 'Catppuccin Macchiato', identifier: 'catppuccin-macchiato' },
+		{ name: 'Catppuccin Mocha', identifier: 'catppuccin-mocha' }
 	].concat(...installedThemes.map((theme) => [{ name: theme.name, identifier: theme.identifier }]));
 	const availableFonts = await getAvailableFonts();
 	const default_i18n = await Translate('Default');

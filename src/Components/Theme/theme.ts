@@ -27,12 +27,29 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
 	updateTheme('*');
 });
 
-let themeJSON: Theme; // user preference theme json
-import * as defaultThemeData from './theme.json';
-interface DefaultTheme {
-	[key: string]: Theme;
+import defaultThemeData from './theme.json';
+import catppuccinMochaTheme from './catppuccin-mocha.json';
+import catppuccinMacchiatoTheme from './catppuccin-macchiato.json';
+import catppuccinFrappeTheme from './catppuccin-frappe.json';
+import catppuccinLatteTheme from './catppuccin-latte.json';
+
+interface ThemeStyles {
+	[key: string]: string;
 }
-const defaultThemeJSON: DefaultTheme = defaultThemeData;
+
+interface DefaultTheme {
+	[key: string]: ThemeStyles;
+}
+
+let themeJSON: ThemeStyles = {};
+
+const defaultThemeJSON: DefaultTheme = {
+	...defaultThemeData,
+	'catppuccin-mocha': catppuccinMochaTheme,
+	'catppuccin-macchiato': catppuccinMacchiatoTheme,
+	'catppuccin-frappe': catppuccinFrappeTheme,
+	'catppuccin-latte': catppuccinLatteTheme
+};
 
 let currentTheme: string;
 
@@ -216,10 +233,10 @@ const updateTheme = async (category?: Category, customStyleSheet?: JSON): Promis
 	const data = await Storage.get('theme');
 	if (IsValid(customStyleSheet)) {
 		console.log(customStyleSheet);
-		themeJSON = customStyleSheet as unknown as Theme;
+		themeJSON = customStyleSheet as unknown as ThemeStyles;
 		document.body.dataset.usingCustomTheme = 'true';
 		listenStylesheetChange((styles) => {
-			themeJSON = styles as unknown as Theme;
+			themeJSON = styles as unknown as ThemeStyles;
 			changeTheme(data.theme, '*');
 		});
 	}

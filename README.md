@@ -1,3 +1,96 @@
+# Xplorer with Catppuccin Themes
+
+A customized version of [Xplorer](https://xplorer.space/) featuring integrated Catppuccin themes. This fork enhances the original Xplorer file manager with a complete set of Catppuccin color schemes while maintaining the powerful features of the original project.
+
+## Features
+
+All the great features from the original Xplorer, plus:
+- Integrated Catppuccin themes:
+  - Catppuccin Latte (Light theme)
+  - Catppuccin Frappe (Medium dark theme)
+  - Catppuccin Macchiato (Darker theme)
+  - Catppuccin Mocha (Darkest theme)
+- Improved macOS window management
+- Enhanced transparency and blur effects
+- [Candy Icons](https://store.kde.org/p/1305251) integration
+
+## Screenshots
+
+![Xplorer in use](docs/images/xplorer-in-use.png)
+*Xplorer with Catppuccin theme in action, showing the file management interface*
+
+![Xplorer with other Catppuccin apps](docs/images/xplorer-catppuccin-rice.png)
+*Xplorer integrated beautifully with other Catppuccin-themed applications*
+
+## Installation
+
+### macOS
+
+Two installation options are available:
+
+1. DMG Installer: [Download Xplorer_0.3.1_aarch64.dmg](releases/macos/Xplorer_0.3.1_aarch64.dmg)
+   - Download and mount the DMG
+   - Drag Xplorer to your Applications folder
+   
+2. Direct App: [Download Xplorer.app](releases/macos/Xplorer.app)
+   - Download and unzip
+   - Move to your Applications folder
+
+After installation:
+1. Open Settings > Appearance to select your preferred Catppuccin theme
+2. Enjoy your beautifully themed file manager!
+
+## Development
+
+To build from source:
+
+```bash
+# Clone the repository
+git clone [your-repo-url]
+cd xplorer
+
+# Install dependencies
+yarn install
+
+# Run in development mode
+yarn dev
+
+# Build for production
+yarn build
+```
+
+## Credits and Licenses
+
+This project is based on multiple open source projects:
+
+- **Xplorer**: The base file manager this project is built upon
+  - Original project: [xplorer.space](https://xplorer.space/)
+  - GitHub: [kimlimjustin/xplorer](https://github.com/kimlimjustin/xplorer)
+  - License: [Apache-2.0](https://github.com/kimlimjustin/xplorer/blob/master/LICENSE)
+
+- **Candy Icons**: The icon theme used in this project
+  - Source: [KDE Store](https://store.kde.org/p/1305251)
+  - Please check the original source for licensing terms
+
+- **Catppuccin**: Color schemes integrated into this project
+  - [Catppuccin Website](https://github.com/catppuccin)
+  - License: MIT
+
+## License
+
+This project is licensed under the Apache-2.0 License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## Acknowledgments
+
+- Justin Maximillian Kimlim and the Xplorer team for creating the original Xplorer
+- The Catppuccin team for their beautiful color schemes
+- The Candy Icons team for their icon theme
+- All contributors to the original Xplorer project
+
 <div align="center">
 <img height=150 src="src-tauri/icons/icon.png" />
 </div>

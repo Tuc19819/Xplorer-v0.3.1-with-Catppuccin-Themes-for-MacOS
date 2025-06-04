@@ -11,23 +11,24 @@ mod storage;
 mod utils;
 
 use clap::{Arg, ArgMatches, Command as ClapCommand};
-
-mod tests;
-
 use font_loader::system_fonts;
 use lazy_static::lazy_static;
 use std::env;
+use std::process::Command;
+use tauri::Manager;
 
 #[cfg(target_os = "windows")]
 use std::os::windows::process::CommandExt;
-use std::process::Command;
-use tauri::Manager;
+
 #[cfg(not(target_os = "linux"))]
 use window_shadows::set_shadow;
-#[cfg(not(target_os = "linux"))]
+
+#[cfg(target_os = "windows")]
 use window_vibrancy::{
     apply_acrylic, apply_blur, clear_acrylic, clear_blur
 };
+
+mod tests;
 
 lazy_static! {
     pub static ref ARGS_STRUCT: ArgMatches = {
@@ -176,11 +177,10 @@ fn change_transparent_effect(effect: String, window: tauri::Window) {
 
 #[cfg(target_os = "macos")]
 #[tauri::command]
-#[inline]
 fn change_transparent_effect(effect: String, window: tauri::Window) {
     if effect.as_str() == "vibrancy" {
         use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
-        apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None).unwrap()
+        apply_vibrancy(&window, NSVisualEffectMaterial::Sidebar, None, None).unwrap();
     }
 }
 
@@ -210,6 +210,21 @@ async fn main() {
     extensions::init_extension().await;
     tauri::async_runtime::set(tokio::runtime::Handle::current());
     tauri::Builder::default()
+        .setup(|app| {
+            #[cfg(target_os = "macos")]
+            {
+                let window = app.get_window("main").unwrap();
+                window.set_decorations(true).unwrap();
+                // Apply vibrancy after a short delay to ensure window is ready
+                let window_clone = window.clone();
+                std::thread::spawn(move || {
+                    std::thread::sleep(std::time::Duration::from_millis(100));
+                    window_vibrancy::apply_vibrancy(&window_clone, window_vibrancy::NSVisualEffectMaterial::Sidebar, None, None)
+                        .expect("Failed to apply vibrancy");
+                });
+            }
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             files_api::read_directory,
             files_api::is_dir,
@@ -249,27 +264,10 @@ async fn main() {
             enable_shadow_effect,
             change_transparent_effect
         ])
-        .plugin(tauri_plugin_window_state::Builder::default().build())
-        .setup(|app| {
-            let window = app.get_window("main").unwrap();
-            let appearance = storage::read_data("appearance").unwrap();
-            let transparent_effect = if appearance.status {
-                appearance.data["transparentEffect"]
-                .as_str()
-                .unwrap_or("none")
-                .to_string()
-            } else {
-                "none".to_string()
-            };
-            let shadow_effect_enabled = if appearance.status {
-                appearance.data["shadowEffect"].as_bool().unwrap_or(true)
-            } else {
-                true
-            };
-            enable_shadow_effect(shadow_effect_enabled, window.clone());
-            change_transparent_effect(transparent_effect, window);
-
-            Ok(())
+        .on_window_event(|event| {
+            if let tauri::WindowEvent::Resized(_) = event.event() {
+                std::thread::sleep(std::time::Duration::from_nanos(1));
+            }
         })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

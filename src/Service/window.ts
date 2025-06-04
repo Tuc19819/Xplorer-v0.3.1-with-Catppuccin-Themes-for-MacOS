@@ -28,9 +28,27 @@ const createNewWindow = (): void => {
 	if (isTauri) {
 		const { WebviewWindow } = require('@tauri-apps/api/window');
 		new WebviewWindow(Math.random().toString(), {
-			decorations: false,
+			decorations: true,
 			transparent: true,
 			title: 'Xplorer',
+			hiddenTitle: true,
+			fullscreen: false,
+			resizable: true,
+			width: 900,
+			height: 600,
+			minWidth: 400,
+			minHeight: 200,
+			// macOS specific settings
+			titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : undefined,
+			skipTaskbar: false,
+			focus: true,
+			visible: false, // Start hidden and show after setup
+		}).once('tauri://created', function () {
+			// Wait a bit for the window to be properly created
+			setTimeout(() => {
+				this.show();
+				this.setDecorations(true);
+			}, 100);
 		});
 	}
 };

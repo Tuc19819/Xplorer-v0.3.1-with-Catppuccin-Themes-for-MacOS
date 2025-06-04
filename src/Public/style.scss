@@ -22,10 +22,38 @@ body {
 	user-select: none;
 	scroll-behavior: smooth;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	background: transparent !important;
 
 	&.resize-horizontal {
 		cursor: w-resize;
 	}
+}
+
+.container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	background: var(--background-color);
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.topbar {
+	-webkit-app-region: drag;
+	height: 28px;
+	padding-left: 70px; /* Account for traffic lights on macOS */
+}
+
+.window-manager, 
+.navigator, 
+input, 
+button, 
+select, 
+.contextmenu, 
+.properties,
+[role="button"],
+[role="link"] {
+	-webkit-app-region: no-drag;
 }
 
 @media (prefers-reduced-motion) {
