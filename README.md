@@ -70,7 +70,8 @@ This project is based on multiple open source projects:
 
 - **Candy Icons**: The icon theme used in this project
   - Source: [KDE Store](https://store.kde.org/p/1305251)
-  - Please check the original source for licensing terms
+  - GitHub: [kimlimjustin/xplorer](https://github.com/EliverLara/candy-icons/tree/master)
+  - License: GNU General Public License v3.0
 
 - **Catppuccin**: Color schemes integrated into this project
   - [Catppuccin Website](https://github.com/catppuccin)
