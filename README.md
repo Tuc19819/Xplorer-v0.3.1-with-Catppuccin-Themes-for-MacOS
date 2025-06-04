@@ -29,11 +29,11 @@ All the great features from the original Xplorer, plus:
 Two installation options are available:
 
 1. DMG Installer: [Download Xplorer_0.3.1_aarch64.dmg](releases/macos/Xplorer_0.3.1_aarch64.dmg)
-   - Download and mount the DMG
+   - Right-click above link to download and mount the DMG
    - Drag Xplorer to your Applications folder
    
 2. Direct App: [Download Xplorer.app](releases/macos/Xplorer.app)
-   - Download and unzip
+   - Right-click above link to download and unzip
    - Move to your Applications folder
 
 After installation:
