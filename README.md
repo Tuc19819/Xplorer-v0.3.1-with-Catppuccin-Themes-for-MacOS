@@ -32,7 +32,7 @@ Two installation options are available:
    - Right-click above link to download and mount the DMG
    - Drag Xplorer to your Applications folder
    
-2. Direct App: [Download Xplorer.app](https://github.com/Tuc19819/Xplorer-v0.3.1-with-Catppuccin-Themes-for-MacOS/raw/refs/heads/main/releases/macos/Xplorer.app.zip))
+2. Direct App: [Download Xplorer.app](https://github.com/Tuc19819/Xplorer-v0.3.1-with-Catppuccin-Themes-for-MacOS/raw/refs/heads/main/releases/macos/Xplorer.app.zip)
    - Right-click above link to download and unzip
    - Move to your Applications folder
 
